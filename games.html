@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leon Akkin Online</title>
+    <link rel="icon" type="image/x-icon" href="https://i.sstatic.net/r0Gtu.jpg?s=256">
+
+    <style>
+        .slider {
+            width: 600px; /* Make sliders longer */
+            height: 20px;
+        }
+        .slidecontainer {
+            margin-bottom: 10px;
+        }
+        body {
+            transition: background-color 0.2s; /* smooth fading */
+        }
+    </style>
+</head>
+<body>
+
+<h1>Games</h1>
+
+<p>Guess Leon's age (controls RED):</p>
+<div class="slidecontainer">
+  <input type="range" min="0" max="99" value="0" class="slider" id="ageRange">
+  <span id="ageValue">0</span>
+</div>
+
+<p>Guess Leon's height (controls GREEN):</p>
+<div class="slidecontainer">
+  <input type="range" min="0" max="99" value="0" class="slider" id="heightRange">
+  <span id="heightValue">0</span>
+</div>
+
+<p>Guess Leon's iPhone (controls BLUE):</p>
+<div class="slidecontainer">
+  <input type="range" min="3" max="17" value="0" class="slider" id="iphoneRange">
+  <span id="iphoneValue">0</span>
+</div>
+
+<script>
+function updateBackgroundColor() {
+    const r = 255 - document.getElementById("ageRange").value * 3;
+    const g = 255 - document.getElementById("heightRange").value * 3;
+    const b = 255 - document.getElementById("iphoneRange").value * 15;
+
+    document.body.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+}
+
+function bindSlider(sliderId, outputId) {
+    const slider = document.getElementById(sliderId);
+    const output = document.getElementById(outputId);
+    output.textContent = slider.value;
+
+    slider.oninput = function() {
+        output.textContent = this.value;
+        updateBackgroundColor();
+    };
+}
+
+bindSlider("ageRange", "ageValue");
+bindSlider("heightRange", "heightValue");
+bindSlider("iphoneRange", "iphoneValue");
+
+// initialize background on load
+updateBackgroundColor();
+
+function resetPage() {
+    // Reset sliders
+    document.getElementById("ageRange").value = 0;
+    document.getElementById("heightRange").value = 0;
+    document.getElementById("iphoneRange").value = 0;
+
+    // Reset displayed numbers
+    document.getElementById("ageValue").textContent = 0;
+    document.getElementById("heightValue").textContent = 0;
+    document.getElementById("iphoneValue").textContent = 0;
+
+    // Reset color
+    updateBackgroundColor();
+}
+</script>
+
+<p>
+ <button type="button" onclick="resetPage()">Submit</button>
+</p>
+
+</body>
+</html>
+
+
