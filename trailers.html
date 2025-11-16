@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leon Akkin Online</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: url('https://i.pinimg.com/originals/ec/b4/9a/ecb49ae237029ebb64c56f7ec5e8c978.gif')
+                        no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #videoOverlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        #videoOverlay video {
+            max-width: 80%;
+            max-height: 80%;
+            border: 5px solid white;
+        }
+
+        #glitterGif {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<img id="glitterGif" src="https://i7.glitter-graphics.org/pub/1864/1864357wqbk6b4we2.gif" alt="Glitter GIF">
+
+<div id="videoOverlay">
+    <video id="videoPlayer" controls>
+        <source src="fantastic.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+</div>
+
+<script>
+    const glitterGif = document.getElementById('glitterGif');
+    const videoOverlay = document.getElementById('videoOverlay');
+    const videoPlayer = document.getElementById('videoPlayer');
+
+    glitterGif.addEventListener('click', () => {
+        // 1️⃣ Trigger video download
+        const link = document.createElement('a');
+        link.href = 'fantastic.mp4'; // replace with your video URL
+        link.download = 'video.mp4';
+        link.click();
+
+        // 2️⃣ Show video overlay
+        videoOverlay.style.display = 'flex';
+        videoPlayer.play();
+    });
+
+    // Click outside video to close overlay
+    videoOverlay.addEventListener('click', (e) => {
+        if (e.target === videoOverlay) {
+            videoPlayer.pause();
+            videoOverlay.style.display = 'none';
+        }
+    });
+</script>
+
+</body>
+</html>
+
+
