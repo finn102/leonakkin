@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leon Akkin Online</title>
+    <link rel="icon" type="image/x-icon" href="https://i.sstatic.net/r0Gtu.jpg?s=256">
+</head>
+<body>
+<h1>Donations</h1>
+
+<p>
+  <label for="username">Card Number:</label>
+  <input id="username" name="uname" type="text" style="width: 200px;" />
+
+ <br>
+ <br>
+
+
+  <label for="password">Month:</label>
+  <input id="password" name="pass" type="text" style="width: 20px;" />
+
+  <label for="password">Year:</label>
+  <input id="password" name="pass" type="text" style="width: 20px;"/>
+<br>
+ <br>
+<label for="password">cvv:</label>
+  <input id="password" name="pass" type="password" style="width: 30px;"/>
+</p>
+
+<p>
+  <button type="button" onclick="showError()">Donate!</button>
+</p>
+
+<p id="message"></p>
+<p id="extra"></p> <!-- placeholder for the button -->
+
+
+<script>
+  function showError() {
+    const msg = document.getElementById("message");
+    msg.textContent = "Thank you for your donation!";
+    msg.style.color = "red";
+
+
+  }
+
+</script>
+
+
+<br>
+<br>
+<img src="https://i.gifer.com/origin/9c/9c794703d42fdc99ac563ffa79ac6915_w200.webp"
+
+
+</html>
