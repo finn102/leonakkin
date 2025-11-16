@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leon Akkin Online</title>
+    <link rel="icon" type="image/x-icon" href="https://i.sstatic.net/r0Gtu.jpg?s=256">
+</head>
+<body>
+<h1>Sign In:</h1>
+
+<p>
+  <label for="username">Username:</label>
+  <input id="username" name="uname" type="text" />
+  <br /><br />
+
+  <label for="password">Password:</label>
+  <input id="password" name="pass" type="password" />
+</p>
+
+<p>
+  <button type="button" onclick="showError()">Log in</button>
+  <button type="button" onclick="Rerror()">Register</button>
+</p>
+
+<p id="message"></p>
+<p id="extra"></p> <!-- placeholder for the button -->
+
+
+<script>
+  function showError() {
+    const msg = document.getElementById("message");
+    msg.textContent = "Username is already taken";
+    msg.style.color = "red";
+
+    // Create "Log in anyway" button
+    const extra = document.getElementById("extra");
+    extra.innerHTML = `
+      <button type="button" onclick="loginAnyway()">Log in anyway</button>
+    `;
+  }
+
+  function loginAnyway() {
+    // Redirect to a new page
+    window.location.href = "newpage.html";
+  }
+</script>
+
+<script>
+  function Rerror() {
+    const msg = document.getElementById("message");
+    msg.textContent = "Account already exists, please log in.";
+    msg.style.color = "red";
+
+    // Remove the "log in anyway" button if it exists
+    document.getElementById("extra").innerHTML = "";
+  }
+</script>
+
+
+</html>
