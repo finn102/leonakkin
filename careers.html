@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Career Spinner</title>
+<style>
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        text-align: center;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+    }
+
+    #wheel {
+        width: 400px;
+        height: 400px;
+        border-radius: 50%;
+        border: 10px solid #333;
+        position: relative;
+        overflow: hidden;
+        transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
+    }
+
+    .segment {
+        position: absolute;
+        width: 50%;
+        height: 50%;
+        top: 50%;
+        left: 50%;
+        transform-origin: 0% 0%;
+        text-align: right;
+        padding-right: 10px;
+        box-sizing: border-box;
+        font-weight: bold;
+        color: white;
+    }
+
+    button {
+        margin-top: 30px;
+        padding: 10px 20px;
+        font-size: 18px;
+        cursor: pointer;
+    }
+
+    #pointer {
+        width: 0;
+        height: 0;
+        border-left: 20px solid transparent;
+        border-right: 20px solid transparent;
+        border-bottom: 40px solid red;
+        position: absolute;
+        top: -40px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+    }
+
+    .segment:nth-child(odd) { background-color: #3498db; }
+    .segment:nth-child(even) { background-color: #e74c3c; }
+</style>
+</head>
+<body>
+
+<h1>Career Spinner</h1>
+<div id="pointer"></div>
+<div id="wheel"></div>
+<button id="spinBtn">Spin!</button>
+<p id="result"></p>
+
+<script>
+const careers = ["Superintendant", "Airbus Pilot", "Saul Goodman", "boeing pilot", "Red Baron", "Dogter", "Dr. Ink", "Dr. Ipcup", "Dr. Omo"];
+const wheel = document.getElementById('wheel');
+const result = document.getElementById('result');
+const spinBtn = document.getElementById('spinBtn');
+
+const numSegments = careers.length;
+const segmentAngle = 370 / numSegments;
+
+// Create wheel segments
+careers.forEach((career, index) => {
+    const segment = document.createElement('div');
+    segment.className = 'segment';
+    segment.style.transform = `rotate(${index * segmentAngle}deg) skewY(-${2000 * segmentAngle}deg)`;
+    segment.textContent = career;
+    wheel.appendChild(segment);
+});
+
+let spinning = false;
+
+spinBtn.addEventListener('click', () => {
+    if(spinning) return;
+    spinning = true;
+    result.textContent = "";
+
+    // Random spin: at least 3 full rotations + random angle
+    const randomDegree = Math.floor(Math.random() * 360);
+    const totalDegree = 1000 + randomDegree; // 1080 = 3 full spins
+
+    wheel.style.transition = "transform 4s cubic-bezier(0.33, 1, 0.68, 1)";
+    wheel.style.transform = `rotate(${totalDegree}deg)`;
+
+    setTimeout(() => {
+        // Determine selected segment
+        const normalizedDegree = totalDegree % 360;
+        const index = Math.floor((360 - normalizedDegree) / segmentAngle) % numSegments;
+        result.textContent = `You got: ${careers[index]}!`;
+        spinning = false;
+    }, 4000);
+});
+</script>
+
+</body>
+</html>
+
