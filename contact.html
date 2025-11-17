@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Saul</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-height: 100vh;
+      background-color: black;
+      font-family: 'Courier New', monospace;
+      color: #fff;
+      margin: 0;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 28px;
+    }
+
+    .phone {
+      width: 260px;
+      height: 500px;
+      background: #111;
+      border: 5px solid #555;
+      border-radius: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      box-shadow: 0 0 20px #000;
+    }
+
+    .screen {
+      width: 90%;
+      height: 200px;
+      background: #333;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .screen img {
+      max-width: 100%;
+      max-height: 100%;
+      display: none;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(3, 70px);
+      gap: 10px;
+    }
+
+    .buttons button {
+      width: 70px;
+      height: 70px;
+      border-radius: 10px; /* Squared like Nokia */
+      border: none;
+      background-color: #444;
+      color: #fff;
+      font-size: 22px;
+      cursor: pointer;
+      box-shadow: 0 4px #222;
+      transition: all 0.1s;
+    }
+
+    .buttons button:active {
+      transform: translateY(4px);
+      box-shadow: 0 0 #222;
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 14px;
+    }
+
+    .footer a {
+      color: #1e90ff;
+      text-decoration: none;
+      margin: 0 5px;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Contact Saul</h1>
+
+  <div class="phone">
+    <div class="screen">
+      <img id="screenGif" src="" alt="Phone GIF">
+    </div>
+    <div class="buttons">
+      <button onclick="showGif(1)">1</button>
+      <button onclick="showGif(2)">2</button>
+      <button onclick="showGif(3)">3</button>
+      <button onclick="showGif(4)">4</button>
+      <button onclick="showGif(5)">5</button>
+      <button onclick="showGif(6)">6</button>
+      <button onclick="showGif(7)">7</button>
+      <button onclick="showGif(8)">8</button>
+      <button onclick="showGif(9)">9</button>
+      <button onclick="showGif('*')">*</button>
+      <button onclick="showGif(0)">0</button>
+      <button onclick="showGif('#')">#</button>
+    </div>
+  </div>
+
+  <div class="footer">
+    Follow me on Instagram:
+    <a href="https://www.instagram.com/leon_akkin?igsh=NDMzdmNtcncwa3Q5" target="_blank">Personal</a> |
+    <a href="https://www.instagram.com/jaack.photography?igsh=MXVucmZtbjhsZWpvNA==" target="_blank">Photography</a>
+  </div>
+
+  <script>
+    const gifs = {
+      1: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOXZpMjBhOGg4bzFndnliOWV3cTZ6c28yYWk1a3RicmdldHo0a3Q1MSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/40dEau6bZRO3S/giphy.gif",
+      2: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOXZpMjBhOGg4bzFndnliOWV3cTZ6c28yYWk1a3RicmdldHo0a3Q1MSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/v8vX9NgwAVlB0D5NYz/giphy.gif",
+      3: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOXZpMjBhOGg4bzFndnliOWV3cTZ6c28yYWk1a3RicmdldHo0a3Q1MSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/iDyF9dOL6nG4uS2S1z/giphy.gif",
+      4: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOXZpMjBhOGg4bzFndnliOWV3cTZ6c28yYWk1a3RicmdldHo0a3Q1MSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3oKIPc07Hwekrmw3oA/giphy.gif",
+      5: "https://media.giphy.com/media/oVQD3pdk7eI0g/giphy.gif",
+      6: "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eTljM2Jzd2xreDVxbDA1a3VjbGprcHBjdTRnNzZ1ZXBueXU5dDRuaiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/11jkrpPYTQkaU8/giphy.gif",
+      7: "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eTljM2Jzd2xreDVxbDA1a3VjbGprcHBjdTRnNzZ1ZXBueXU5dDRuaiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/k0Lm9DxU9jpwlBZnC7/giphy.gif",
+      8: "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3YmU0NTJ4MjQyOXdpMmd1cjBjYzUyNmd4cDNtazJrd2E4cTB6OXo3eiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/l0ExhJm2YU6jEeXss/giphy.gif",
+      9: "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3YmU0NTJ4MjQyOXdpMmd1cjBjYzUyNmd4cDNtazJrd2E4cTB6OXo3eiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3o6YfZMNzUwtMFMXUQ/giphy.gif",
+      0: "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3ZHdwMm4yaG9mYnBheGR5eXA2a2dqdGYwMmV2ZG0wa3JubWpka2hteCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/iFsQz6GcAm15EW82pU/giphy.gif",
+      "*": "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3ZHdwMm4yaG9mYnBheGR5eXA2a2dqdGYwMmV2ZG0wa3JubWpka2hteCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/l0HlxY4gyQcMgwwHm/giphy.gif",
+      "#": "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3ZHdwMm4yaG9mYnBheGR5eXA2a2dqdGYwMmV2ZG0wa3JubWpka2hteCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/Iu0JGJRja4DB521a2Q/giphy.gif"
+    };
+
+    function showGif(key) {
+      const gif = document.getElementById('screenGif');
+      gif.src = gifs[key] || "";
+      gif.style.display = 'block';
+
+
+    }
+  </script>
+
+</body>
+</html>
