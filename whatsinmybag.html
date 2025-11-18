@@ -5,53 +5,88 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>What's in My Bag</title>
   <style>
+    /* Layout */
     body {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 20px;
       margin: 40px 0;
-      font-family: sans-serif;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
     }
+
+    /* Container that holds the bag images. It becomes the reference box for the absolute overlay. */
     #bag-container {
       position: relative;
+      display: inline-block;    /* shrink-wrap to the closed-bag image */
       cursor: pointer;
     }
+
+    /* Ensure images render as blocks (no inline gaps) and scale nicely */
+    #bag-container img,
+    #bag-closed,
+    #bag-open {
+      display: block;
+      width: 300px;      /* change this number to resize both bag images together */
+      height: auto;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    /* The open-bag image sits absolutely on top of the closed-bag and matches its size because the container "shrink wraps" the closed image and open uses width:100% below. */
     #bag-open {
       position: absolute;
       top: 0;
       left: 0;
+      width: 100%;       /* match the rendered size of the closed bag */
+      height: 100%;
       opacity: 0;
-      transition: opacity 0.4s ease;
-      pointer-events: none;
-      width: 400px;
-      height: auto;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      pointer-events: none; /* clicks pass through to the container */
+      transform: scale(0.98);
     }
+
+    /* when visible, crossfade + slight scale to emphasize open */
     #bag-open.visible {
       opacity: 1;
+      transform: scale(1);
     }
+
+    /* Click-to-open text sizing and fade */
     #click-text {
-      transition: opacity 0.3s ease;
-      width: 300px;
+      width: 220px; /* adjust independently if needed */
       height: auto;
+      transition: opacity 0.3s ease, transform 0.3s ease;
     }
     #click-text.hidden {
       opacity: 0;
-    }
-    #bag-closed {
-      width: 500px;
-      height: auto;
+      transform: translateY(6px);
+      pointer-events: none;
     }
 
+    /* Top heading image sizing (adjust if too big) */
     img[alt="What's in my bag"] {
-      width: 400px;
+      width: 300px;
       height: auto;
+      display: block;
+    }
+
+    /* Make the whole page responsive: cap image sizes on small screens */
+    @media (max-width: 420px) {
+      #bag-container img,
+      #bag-closed,
+      #bag-open {
+        width: 86vw;
+      }
+      img[alt="What's in my bag"] { width: 92vw; }
+      #click-text { width: 60vw; }
+    }
   </style>
 </head>
 <body>
   <img src="whatsinmybagtext.png" alt="What's in my bag" />
 
-  <div id="bag-container">
+  <div id="bag-container" aria-label="bag">
     <img id="bag-closed" src="bagclosed.png" alt="Bag closed" />
     <img id="bag-open" src="bagopen.png" alt="Bag open" />
   </div>
